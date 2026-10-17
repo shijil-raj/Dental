@@ -38,7 +38,7 @@ const apiKey = import.meta.env.VITE_GD_API_KEY
 export const GOODDOC_ENABLED = Boolean(apiKey)
 const apiBaseUrl = 'https://gd-plugin-api.vizru-aix.workers.dev'
 const panelUrl = 'https://gd-plugin-panel.vizru-aix.workers.dev'
-
+const devMode = new URLSearchParams(location.search).get('dev') !== '0';
 Object.assign(debugState.gooddoc, { enabled: GOODDOC_ENABLED, apiBaseUrl, panelUrl, apiKey: mask(apiKey), origin: location.origin })
 
 // The key is baked in at build time, so a CI build without it ships with GoodDoc off. Say so.
@@ -88,7 +88,7 @@ export function GoodDocProvider({ children }: { children: ReactNode }) {
       onError={(e: GDPluginError) => {
         debugState.setGoodDocError(e.code, e.message)
         log.error(`Control Panel unavailable (${e.code}): ${e.message}. ${HINTS[e.code] ?? ''}`, e)
-      }}
+      }}      devMode={devMode}
     >
       <GoodDocBridge />
       {children}

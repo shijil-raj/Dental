@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "dentalcare-hms",
+  "name": "demo-hms",
   "main": "worker/index.ts",
   "compatibility_date": "2026-09-01",
   // Worker console logs in the Cloudflare dashboard (Observability → Logs); or run `npx wrangler tail`.
